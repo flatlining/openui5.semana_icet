@@ -11,9 +11,9 @@ sap.ui.controller("icet.main", {
 
 	gotoOData: function() {
 		var bus = sap.ui.getCore().getEventBus();
-        bus.publish("nav", "to", { 
-            id : "odataPageView",
-        });
+		bus.publish("nav", "to", { 
+			id: "odataPageView",
+		});
 	},
 
 /**

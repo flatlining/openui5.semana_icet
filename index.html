@@ -13,7 +13,8 @@
 
 		<script>
 				sap.ui.localResources("icet");
-				sap.ui.jsview("appView", "icet.app").placeAt("content");
+				sap.ui.view({id:"appView", viewName:"icet.app", type:sap.ui.core.mvc.ViewType.JS}).placeAt("content");
+				//sap.ui.jsview("appView", "icet.app").placeAt("content");
 		</script>
 
 	</head>

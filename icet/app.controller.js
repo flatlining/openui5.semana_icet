@@ -8,7 +8,8 @@ sap.ui.controller("icet.app", {
 	onInit: function() {
 		var view = this.getView();
 
-		this.app = view.byId("icetApp");
+		//this.app = view.byId("icetApp");
+		this.app = sap.ui.getCore().byId("icetApp");
 		
 		var bus = sap.ui.getCore().getEventBus();
         bus.subscribe("nav", "to", this.navToHandler, this);
