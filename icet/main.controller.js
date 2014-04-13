@@ -11,9 +11,7 @@ sap.ui.controller("icet.main", {
 			var bus = sap.ui.getCore().getEventBus();
 			bus.publish("nav", "to", { 
 				id: "odata",
-				data: {
-					context: null
-				}
+				data: { context: null }
 			});
 		});
 	},

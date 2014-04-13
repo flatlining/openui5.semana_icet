@@ -13,16 +13,11 @@ sap.ui.jsview("icet.odata", {
 	* @memberOf icet.odata
 	*/ 
 	createContent : function(oController) {
-		var i18nModel = new sap.ui.model.resource.ResourceModel({
-			bundleUrl: "i18n/messageBundle.properties"
-		});
+		var i18nModel = new sap.ui.model.resource.ResourceModel({ bundleUrl: "i18n/messageBundle.properties" });
 
-		var oPage = new sap.m.Page({
+		var oPage = new sap.m.Page("pageOData", {
 			title: "{i18n>OData}",
 			showNavButton: true,
-			navButtonPress: function() {
-				app.back();
-			},
 			content: [
 			]
 		});

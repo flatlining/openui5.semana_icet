@@ -12,8 +12,8 @@ sap.ui.controller("icet.app", {
 		this.app = sap.ui.getCore().byId("icetApp");
 		
 		var bus = sap.ui.getCore().getEventBus();
-        bus.subscribe("nav", "to", this.navToHandler, this);
-        bus.subscribe("nav", "back", this.navBackHandler, this);
+		bus.subscribe("nav", "to", this.navToHandler, this);
+		bus.subscribe("nav", "back", this.navBackHandler, this);
 	},
 
 	navToHandler: function(channelId, eventId, data) {
