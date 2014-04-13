@@ -15,10 +15,13 @@ sap.ui.jsview("icet.odata", {
 	createContent : function(oController) {
 		var i18nModel = new sap.ui.model.resource.ResourceModel({ bundleUrl: "i18n/messageBundle.properties" });
 
+		var listPersons = new sap.m.List("listPersons");
+
 		var oPage = new sap.m.Page("pageOData", {
 			title: "{i18n>OData}",
 			showNavButton: true,
 			content: [
+				listPersons,
 			]
 		});
 		oPage.setModel(i18nModel, "i18n");

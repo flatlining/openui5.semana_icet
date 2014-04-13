@@ -6,11 +6,15 @@ sap.ui.controller("icet.odata", {
 * @memberOf icet.odata
 */
 	onInit: function() {
+		var view = this.getViews();
+
 		var pageOData = sap.ui.getCore().byId("pageOData");
 		pageOData.attachNavButtonPress(function(){
 			var bus = sap.ui.getCore().getEventBus();
 			bus.publish("nav", "back");
 		});
+
+		var listPersons = sap.ui.getCore().byId("listPersons");
 	},
 
 /**
