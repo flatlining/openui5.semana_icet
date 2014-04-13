@@ -17,7 +17,7 @@ sap.ui.jsview("icet.main", {
 			bundleUrl: "i18n/messageBundle.properties"
 		});
 
-		var btnToOData = new sap.m.Button ({
+		var btnToOData = new sap.m.Button ("btnOData", {
 			text: "{i18n>OData}",
 		})
 

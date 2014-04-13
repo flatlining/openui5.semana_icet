@@ -5,9 +5,13 @@ sap.ui.controller("icet.main", {
 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
 * @memberOf icet.main
 */
-//	onInit: function() {
-//
-//	},
+	onInit: function() {
+		var view = this.getView();
+
+		var btnOData = view.byId("btnOData");
+
+		jQuery.sap.log.error("[ICET]: " + btnOData);
+	},
 
 /**
 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered

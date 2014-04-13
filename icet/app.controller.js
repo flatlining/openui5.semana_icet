@@ -5,9 +5,31 @@ sap.ui.controller("icet.app", {
 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
 * @memberOf icet.app
 */
-//	onInit: function() {
-//
-//	},
+	onInit: function() {
+		var view = this.getView();
+
+		this.app = view.byId("icetApp");
+
+		var bus = sap.ui.getCore().getEventBus();
+        bus.subscribe("nav", "to", this.navToHandler, this);
+        bus.subscribe("nav", "back", this.navBackHandler, this)
+	},
+
+	navToHandler: function(channelId, eventId, data) {
+		if (data && data.id) {
+			if (this.app.getPage(data.id) === null) {
+				jQuery.sap.log.info("now loading page: " + data.id);
+				this.app.addPage(sap.ui.jsview(data.id, "icet." + data.id));
+			}
+			this.app.to(data.id, data.data.context);
+		} else {
+			jQuery.sap.log.error("nav-to invalid data: " + data);
+		}
+	},
+
+	navBackHandler: function() {
+		this.app.back();
+	},
 
 /**
 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered

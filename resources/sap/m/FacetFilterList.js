@@ -1,0 +1,24 @@
+/*!
+ * SAP UI development toolkit for HTML5 (SAPUI5/OpenUI5)
+ * (c) Copyright 2009-2014 SAP AG or an SAP affiliate company. 
+ * Licensed under the Apache License, Version 2.0 - see LICENSE.txt.
+ */
+jQuery.sap.declare("sap.m.FacetFilterList");jQuery.sap.require("sap.m.library");jQuery.sap.require("sap.m.List");sap.m.List.extend("sap.m.FacetFilterList",{metadata:{publicMethods:["getSelectedKeys","setSelectedKeys"],library:"sap.m",properties:{"title":{type:"string",group:"Appearance",defaultValue:null},"multiSelect":{type:"boolean",group:"Behavior",defaultValue:true,deprecated:true},"active":{type:"boolean",group:"Behavior",defaultValue:true},"allCount":{type:"int",group:"Appearance",defaultValue:null},"sequence":{type:"int",group:"Behavior",defaultValue:-1},"key":{type:"string",group:"Identification",defaultValue:null}},events:{"listOpen":{},"listClose":{}}}});sap.m.FacetFilterList.M_EVENTS={'listOpen':'listOpen','listClose':'listClose'};
+sap.m.FacetFilterList.prototype.setTitle=function(t){this.setProperty("title",t,true);if(this.getParent()&&this.getParent()._setButtonText){this.getParent()._setButtonText(this)}return this};
+sap.m.FacetFilterList.prototype.setMultiSelect=function(v){this.setProperty("multiSelect",v,true);var m=v?sap.m.ListMode.MultiSelect:sap.m.ListMode.SingleSelectMaster;this.setMode(m);return this};
+sap.m.FacetFilterList.prototype.setMode=function(m){if(m===sap.m.ListMode.MultiSelect||m===sap.m.ListMode.SingleSelectMaster){sap.m.List.prototype.setMode.call(this,m);this.setProperty("multiSelect",m===sap.m.ListMode.MultiSelect?true:false,true)}return this};
+sap.m.FacetFilterList.prototype.init=function(){this._oSelectedKeys={};sap.m.List.prototype.init.call(this);this.setMode(sap.m.ListMode.MultiSelect);this.setIncludeItemInSelection(true);this._searchValue=null};
+sap.m.FacetFilterList.prototype._fireListCloseEvent=function(){var s=this.getSelectedItems();var S=this.getSelectedKeys();var a=Object.getOwnPropertyNames(this.getSelectedKeys());var A=a.length===0;this.fireListClose({selectedItems:s,selectedKeys:S,allSelected:A})};
+sap.m.FacetFilterList.prototype._updateActiveState=function(){var c=sap.ui.getCore().byId(this.getAssociation("allcheckbox"));if(this.getSelectedItems().length>0||Object.getOwnPropertyNames(this._oSelectedKeys).length>0||(c&&c.getSelected())){this.setActive(true)}};
+sap.m.FacetFilterList.prototype._handleSearchEvent=function(e){var s=e.getParameters()["query"];if(s===undefined){s=e.getParameters()["newValue"]}this._search(s);this._updateSelectAllCheckBox()};
+sap.m.FacetFilterList.prototype._search=function(s){if(s!==this._searchValue){this._searchValue=s;var b=this.getBinding("items");if(b){var p=this.getBindingInfo("items").template.getBindingInfo("text").parts[0].path;if(p){var u=new sap.ui.model.Filter(p,sap.ui.model.FilterOperator.Contains,s);var f=new sap.ui.model.Filter([u],true);b.filter(f,sap.ui.model.FilterType.Control)}}else{jQuery.sap.log.warning("No filtering performed","The list must be defined with a binding for search to work",this)}}};
+sap.m.FacetFilterList.prototype._getSearchValue=function(){return this._searchValue};
+sap.m.FacetFilterList.prototype._updateSelectAllCheckBox=function(i){if(this.getMultiSelect()){var c=sap.ui.getCore().byId(this.getAssociation("allcheckbox"));if(i){c&&c.setSelected(false)}else{var n=this.getSelectedItems().length;if(i!==undefined){--n}c&&c.setSelected(n===0&&Object.getOwnPropertyNames(this._oSelectedKeys).length===0&&this.getActive())}}};
+sap.m.FacetFilterList.prototype._addSelectedKey=function(k,t){if(this.getMode()===sap.m.ListMode.SingleSelectMaster){this._clearSelectedKeys()}k&&(this._oSelectedKeys[k]=t||k)};
+sap.m.FacetFilterList.prototype._removeSelectedKey=function(k){k&&delete this._oSelectedKeys[k]};
+sap.m.FacetFilterList.prototype._clearSelectedKeys=function(){this._oSelectedKeys={}};
+sap.m.FacetFilterList.prototype._selectItemsByKeys=function(){this.getItems().forEach(function(i){i.setSelected(this._oSelectedKeys[i.getKey()]!==undefined)},this)};
+sap.m.FacetFilterList.prototype.getSelectedKeys=function(){var r={};var k=this._oSelectedKeys;Object.getOwnPropertyNames(k).forEach(function(a){r[a]=k[a]});return r};
+sap.m.FacetFilterList.prototype.setSelectedKeys=function(k){this._clearSelectedKeys();k&&Object.getOwnPropertyNames(k).forEach(function(a){this._addSelectedKey(a,k[a])},this);this._selectItemsByKeys()};
+sap.m.FacetFilterList.prototype.onItemSetSelected=function(i,s){if(s){this._addSelectedKey(i.getKey(),i.getText())}else{this._removeSelectedKey(i.getKey())}sap.m.ListBase.prototype.onItemSetSelected.apply(this,arguments);this._updateSelectAllCheckBox(s);!this.getDomRef()&&this.getParent()&&this.getParent().getDomRef()&&this.getParent().invalidate()};
+sap.m.FacetFilterList.prototype.updateItems=function(r){sap.m.ListBase.prototype.updateItems.apply(this,arguments);this._selectItemsByKeys()};
