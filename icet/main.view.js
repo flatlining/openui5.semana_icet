@@ -13,12 +13,19 @@ sap.ui.jsview("icet.main", {
 	* @memberOf icet.main
 	*/ 
 	createContent : function(oController) {
- 		return new sap.m.Page({
-			title: "Title",
+		var i18nModel = new sap.ui.model.resource.ResourceModel({
+			bundleUrl: "i18n/messageBundle.properties"
+		});
+
+		var oPage = new sap.m.Page({
+			title: "{i18n>mainTitle}",
 			content: [
-			
+
 			]
 		});
+		oPage.setModel(i18nModel, "i18n");
+
+ 		return oPage;
 	}
 
 });
