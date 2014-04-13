@@ -9,21 +9,22 @@ sap.ui.controller("icet.app", {
 		var view = this.getView();
 
 		this.app = view.byId("icetApp");
-
+		
 		var bus = sap.ui.getCore().getEventBus();
         bus.subscribe("nav", "to", this.navToHandler, this);
-        bus.subscribe("nav", "back", this.navBackHandler, this)
+        bus.subscribe("nav", "back", this.navBackHandler, this);
 	},
 
 	navToHandler: function(channelId, eventId, data) {
+		alert(this.app);
 		if (data && data.id) {
 			if (this.app.getPage(data.id) === null) {
-				jQuery.sap.log.info("now loading page: " + data.id);
+				jQuery.sap.log.error("[ICET] now loading page: " + data.id);
 				this.app.addPage(sap.ui.jsview(data.id, "icet." + data.id));
 			}
 			this.app.to(data.id, data.data.context);
 		} else {
-			jQuery.sap.log.error("nav-to invalid data: " + data);
+			jQuery.sap.log.error("[ICET] nav-to invalid data: " + data);
 		}
 	},
 

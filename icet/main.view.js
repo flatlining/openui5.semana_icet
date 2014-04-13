@@ -19,6 +19,7 @@ sap.ui.jsview("icet.main", {
 
 		var btnToOData = new sap.m.Button ("btnOData", {
 			text: "{i18n>OData}",
+			press: [oController.gotoOData]
 		})
 
 		var oPage = new sap.m.Page({

@@ -5,12 +5,15 @@ sap.ui.controller("icet.main", {
 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
 * @memberOf icet.main
 */
-	onInit: function() {
-		var view = this.getView();
+//	onInit: function() {
+//
+//	},
 
-		var btnOData = view.byId("btnOData");
-
-		jQuery.sap.log.error("[ICET]: " + btnOData);
+	gotoOData: function() {
+		var bus = sap.ui.getCore().getEventBus();
+        bus.publish("nav", "to", { 
+            id : "odataPageView",
+        });
 	},
 
 /**
