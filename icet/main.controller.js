@@ -7,12 +7,14 @@ sap.ui.controller("icet.main", {
 */
 	onInit: function() {
 		var btnOData = sap.ui.getCore().byId("btnOData");
-	},
-
-	gotoOData: function() {
-		var bus = sap.ui.getCore().getEventBus();
-		bus.publish("nav", "to", { 
-			id: "odataPageView",
+		btnOData.attachPress(function() {
+			var bus = sap.ui.getCore().getEventBus();
+			bus.publish("nav", "to", { 
+				id: "odata",
+				data: {
+					context: null
+				}
+			});
 		});
 	},
 

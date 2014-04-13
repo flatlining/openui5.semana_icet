@@ -17,7 +17,6 @@ sap.ui.controller("icet.app", {
 	},
 
 	navToHandler: function(channelId, eventId, data) {
-		alert(this.app);
 		if (data && data.id) {
 			if (this.app.getPage(data.id) === null) {
 				jQuery.sap.log.error("[ICET] now loading page: " + data.id);
