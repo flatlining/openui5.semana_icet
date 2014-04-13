@@ -15,8 +15,8 @@ sap.ui.jsview("icet.app", {
 	createContent : function(oController) {
 		var app = new sap.m.App("icetApp");
 		
-		app.addPage(sap.ui.jsview("main", "icet.main"));
-		//app.addPage(sap.ui.jsview("odata", "icet.odata"));
+		//app.addPage(sap.ui.jsview("main", "icet.main"));
+		app.addPage(sap.ui.view({id: "main", viewName: "icet.main", type:sap.ui.core.mvc.ViewType.JS}));
 
 		return app;
 	}

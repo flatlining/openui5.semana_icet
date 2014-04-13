@@ -19,8 +19,9 @@ sap.ui.controller("icet.app", {
 	navToHandler: function(channelId, eventId, data) {
 		if (data && data.id) {
 			if (this.app.getPage(data.id) === null) {
-				jQuery.sap.log.error("[ICET] now loading page: " + data.id);
-				this.app.addPage(sap.ui.jsview(data.id, "icet." + data.id));
+				jQuery.sap.log.info("[ICET] now loading page: " + data.id);
+				//this.app.addPage(sap.ui.jsview(data.id, "icet." + data.id));
+				this.app.addPage(sap.ui.view({id: data.id, viewName: "icet." + data.id, type:sap.ui.core.mvc.ViewType.JS}));
 			}
 			this.app.to(data.id, data.data.context);
 		} else {
