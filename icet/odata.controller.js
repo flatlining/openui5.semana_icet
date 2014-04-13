@@ -5,9 +5,13 @@ sap.ui.controller("icet.odata", {
 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
 * @memberOf icet.odata
 */
-//	onInit: function() {
-//
-//	},
+	onInit: function() {
+		var pageOData = sap.ui.getCore().byId("pageOData");
+		pageOData.attachNavButtonPress(function(){
+			var bus = sap.ui.getCore().getEventBus();
+			bus.publish("nav", "back");
+		});
+	},
 
 /**
 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
