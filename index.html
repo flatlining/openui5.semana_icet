@@ -13,12 +13,7 @@
 
 		<script>
 				sap.ui.localResources("icet");
-				var app = new sap.m.App({initialPage:"idmain"});
-				var pageMain = sap.ui.view({id:"idmain", viewName:"icet.main", type:sap.ui.core.mvc.ViewType.JS});
-				var pageOData = sap.ui.view({id:"idodata", viewName:"icet.odata", type:sap.ui.core.mvc.ViewType.JS});
-				app.addPage(pageMain);
-				app.addPage(pageOData);
-				app.placeAt("content");
+				sap.ui.jsview("appView", "icet.app").placeAt("content");
 		</script>
 
 	</head>
