@@ -6,9 +6,7 @@ sap.ui.controller("icet.main", {
 * @memberOf icet.main
 */
 	onInit: function() {
-		var view = this.getView();
-
-		var btnOData = view.byId("btnOData");
+		var btnOData = sap.ui.getCore().byId("btnOData");
 
 		jQuery.sap.log.error("[ICET]: " + btnOData);
 	},
